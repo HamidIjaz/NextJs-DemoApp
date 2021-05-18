@@ -1,0 +1,38 @@
+import ArticleList from "../components/ArticleList";
+import { server } from "../config";
+
+export default function Home({ articles }) {
+  return (
+    <div>
+      <ArticleList articles={articles} />
+    </div>
+  );
+}
+
+// data from a file(can be from DB) is
+
+export const getStaticProps = async () => {
+  const res = await fetch(`${server}/api/articles`);
+  const articles = await res.json();
+
+  return {
+    props: {
+      articles,
+    },
+  };
+};
+
+// this is from jsonplaceholder
+
+// export const getStaticProps = async () => {
+//   const res = await fetch(
+//     `https://jsonplaceholder.typicode.com/posts?_limit=6`
+//   );
+//   const articles = await res.json();
+
+//   return {
+//     props: {
+//       articles,
+//     },
+//   };
+// };
